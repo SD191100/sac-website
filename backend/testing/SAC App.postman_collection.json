@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"lundBahadur\",\n    \"password\": \"kaalaLund\" \n}",
+							"raw": "{\n    \"username\": \"sahil\",\n    \"password\": \"sahil@123\" \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -34,12 +34,12 @@
 						"header": [
 							{
 								"key": "username",
-								"value": "lundBahadur",
+								"value": "sahil",
 								"type": "text"
 							},
 							{
 								"key": "password",
-								"value": "kaalaLun",
+								"value": "sahil@123",
 								"type": "text"
 							}
 						],

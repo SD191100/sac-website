@@ -1,282 +1,331 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+
 
 const app = express();
 const PORT = 3000;
-const ADMINS = [];
-const EVENTS = [];
-const MEMBERS = [];
-const GALLERY = [];
-const NEWSLETTERS = [];
+const SECRET = 'SaCS3cr3T';
 
 app.use(cors());
 app.use(express.json())
 
-function genId() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let randomString = '';
-
-    for (let i = 0; i < 10; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        randomString += characters.charAt(randomIndex);
-    }
-
-    return randomString;
+const auth = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader.split(' ')[1];
+  if (!token) {
+    res.status(403).json({ message: 'Token not found' });
+  }
+  else {
+    jwt.verify(token, SECRET, (err, user) => {
+      if (err) {
+        res.status(403).json({ message: 'Invalid Token' });
+      }
+      else {
+        req.user = user;
+        next();
+      }
+    })
+  }
 }
 
-// mongoose.connect('mongodb+srv://shivamdurgude:01010202@cluster0.hny5grp.mongodb.net/sac', { dbName: sac });
-
-app.get('/', (req, res) => {
-    res.send('Hello World');
+const adminSchema = new mongoose.Schema({
+  username: String,
+  password: String
 })
 
-app.post('/admin/signup', (req, res) => {
-    const { username, password } = req.body;
-    // console.log('admin signup body ' + username + " " + password);
-    const admin = ADMINS.find(a => a.username === username);
-    if (admin) {
-        res.json({ message: 'Admin already exist' });
-    }
-    else {
-        ADMINS.push({ username: username, password: password });
-        res.json({ message: "admin registered sucessfully" });
-    }
-})
-app.post('/admin/login', (req, res) => {
-    const { username, password } = req.headers;
-    const admin = ADMINS.find(a => a.username === username && a.password === password);
-    if (admin) {
-        // console.log('kya hai ye ' + admin.username + " " + admin.password);
-        res.json({ message: 'Login Sucessful' })
-    }
-    else {
-        res.status(404).json({ message: 'admin not found' })
-    }
+const eventSchema = new mongoose.Schema({
+  eventName: String,
+  eventDateandTime: String,
+  eventVenue: String,
+  eventContact: {
+    contactName: String,
+    contact: String
+  }
 })
 
-app.post('/admin/events', (req, res) => {
-    // adds events
-    const { eventName, eventDateandTime, eventVenue, eventContact } = req.body;
-    const event = EVENTS.find(e => e.eventName === eventName);
-    if (event) {
-        res.status(403).json({ message: 'event already uploaded, check name again' });
-    }
-    else {
-        const id = genId();
-        EVENTS.push({
-            id: id,
-            eventName: eventName,
-            eventDateandTime: eventDateandTime,
-            eventVenue: eventVenue,
-            eventContact: eventContact
-        })
-        res.status(201).json({ message: 'event added sucessfully' });
-    }
-});
-app.get('/admin/events', (req, res) => {
-    // gets/shows all events
-    res.json({ message: 'events Fetched Sucessfully, ', EVENTS });
-});
-app.get('/admin/events/:eventId', (req, res) => {
-    // gets/shows one events
-    const id = req.params.eventId;
-    const event = EVENTS.find(e => e.id === id);
-    if (event) {
-        res.json({ event });
-    } else {
-        res.status(404).json({ message: 'Event not found' });
-    }
-});
-app.put('/admin/events/:eventId', (req, res) => {
-    // Edit one events
-    const id = req.params.eventId;
-    const { eventName, eventDateandTime, eventVenue, eventContact } = req.body;
-    const event = EVENTS.find(e => e.id === id);
-    if (event) {
-        event.eventName = eventName;
-        event.eventDateandTime = eventDateandTime;
-        event.eventVenue = eventVenue;
-        event.eventContact = eventContact;
-        res.json({ message: 'Event updated successfully' });
-    } else {
-        res.status(404).json({ message: 'Event not found' });
-    }
-});
-app.delete('/admin/events/:eventId', (req, res) => {
-    // delete one events
-    const id = req.params.eventId;
-    const index = EVENTS.findIndex(e => e.id === id);
-    if (index !== -1) {
-        EVENTS.splice(index, 1);
-        res.json({ message: 'Event deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Event not found' });
-    }
+const memberSchema = new mongoose.Schema({
+  memberName: String,
+  memberPost: String,
+  memberImageLink: String,
+  memberContact: String,
+  memberTeam: String
+})
+
+const gallerySchema = new mongoose.Schema({
+  photoLink: String,
+  description: String
+})
+
+const letterSchema = new mongoose.Schema({
+  letterLink: String,
+  description: String,
+  year: String
+})
+
+const Admin = mongoose.model('Admin', adminSchema);
+const Event = mongoose.model('Event', eventSchema);
+const Member = mongoose.model('Member', memberSchema);
+const Gallery = mongoose.model('Gallery', gallerySchema);
+const Letter = mongoose.model('Letter', letterSchema);
+
+mongoose.connect('mongodb+srv://shivamdurgude:01010202@cluster0.hny5grp.mongodb.net/sac', { dbName: 'sac' });
+
+app.get('/', auth, async (req, res) => {
+  res.send('Hello World');
+})
+
+app.post('/admin/signup', async (req, res) => {
+  const { username, password } = req.body;
+  // console.log('admin signup body ' + username + " " + password);
+  const admin = await Admin.findOne({ username: username });
+  if (admin) {
+    res.json({ message: 'Admin already exist' });
+  }
+  else {
+    const newAdmin = new Admin({ username: username, password: password });
+    await newAdmin.save();
+    res.json({ message: "admin registered sucessfully" });
+  }
+})
+
+app.post('/admin/login', async (req, res) => {
+  const { username, password } = req.headers;
+  const admin = await Admin.findOne({ username: username, password: password });
+  if (admin) {
+    const token = jwt.sign({ username: admin.username }, SECRET , { expiresIn: '1h' });
+    res.json({ message: 'Login Sucessful', token: token});
+  }
+  else {
+    res.status(404).json({ message: 'admin not found' });
+  }
+})
+
+app.post('/admin/events', auth, async (req, res) => {
+  // adds events
+  const { eventName, eventDateandTime, eventVenue, eventContact, eventOrganiser } = req.body;
+  const event = await Event.findOne({ eventName: eventName });
+  if (event) {
+    res.status(403).json({ message: 'event already uploaded, check name again' });
+  }
+  else {
+    const newEvent = new Event({
+      eventName: eventName,
+      eventDateandTime: eventDateandTime,
+      eventVenue: eventVenue,
+      eventContact: {
+        contactName: eventOrganiser,
+        contact: eventContact
+      }
+    });
+    await newEvent.save();
+    res.status(201).json({ message: 'event added sucessfully' });
+  }
 });
 
-app.get('/admin/member', (req, res) => {
-    // gets/shows all members
-    res.json({ message: 'members Fetched Sucessfully, ', MEMBERS });
-});
-app.post('/admin/member', (req, res) => {
-    const { memberName, memberImageLink, memberPost, memberContact, memberTeam } = req.body;
-    // console.log(memberName + " " + memberImageLink + " " + memberPost + " " + memberContact);
-    const member = MEMBERS.find(m => m.memberName === memberName);
-    if (member) {
-        res.status(403).json({ message: 'Member already Exist, check name again' });
-    }
-    else {
-        const id = genId();
-        MEMBERS.push({
-            id: id,
-            memberName: memberName,
-            memberPost: memberPost,
-            memberContact: memberContact,
-            memberImageLink: memberImageLink, //add team name
-            memberTeam: memberTeam
-        })
-        res.status(201).json({ message: 'Member added sucessfully' }); // change it to member added successfully
-    }
-});
-app.get('/admin/member/:memberId', (req, res) => {
-    const id = req.params.memberId;
-    const member = MEMBERS.find(m => m.id === id);
-    if (member) {
-        res.json({ member });
-    } else {
-        res.status(404).json({ message: 'Member not found' });
-    }
-});
-app.put('/admin/member/:memberId', (req, res) => {
-    const id = req.params.memberId;
-    const { memberName, memberImageLink, memberPost, memberContact } = req.body;
-    const member = MEMBERS.find(m => m.id === id);
-    if (member) {
-        member.memberName = memberName;
-        member.memberImageLink = memberImageLink;
-        member.memberPost = memberPost;
-        member.memberContact = memberContact;
-        res.json({ message: 'Member updated successfully' });
-    } else {
-        res.status(404).json({ message: 'Member not found' });
-    }
-});
-app.delete('/admin/member/:memberId', (req, res) => {
-    const id = req.params.memberId;
-    const index = MEMBERS.findIndex(m => m.id === id);
-    if (index !== -1) {
-        MEMBERS.splice(index, 1);
-        res.json({ message: 'Member deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Member not found' });
-    }
+app.get('/admin/events', auth, async (req, res) => {
+  // gets/shows all events
+  const events = await Event.find({});
+  res.json({ message: 'events Fetched Sucessfully, ', events: events });
 });
 
-app.post('/admin/gallery', (req, res) => {
-    const { photoLink, description } = req.body;
-    const id = genId();
-    const newPhoto = { id, photoLink, description };
-
-    // add photo to gallery
-    GALLERY.push(newPhoto);
-    res.status(201).json({ message: 'Photo added successfully' });
-});
-app.get('/admin/gallery', (req, res) => {
-    res.json({ message: 'images Fetched Sucessfully, ', GALLERY});
-});
-app.get('/admin/gallery/:photoId', (req, res) => {
-    const id = req.params.photoId;
-    const photo = GALLERY.find(p => p.id === id);
-    if (photo) {
-        res.json({ photo });
-    } else {
-        res.status(404).json({ message: 'Photo not found' });
-    }
-});
-app.put('/admin/gallery/:photoId', (req, res) => {
-    const id = req.params.photoId;
-    const { photoLink, description } = req.body;
-    const photo = GALLERY.find(p => p.id === id);
-    if (photo) {
-        photo.photoLink = photoLink;
-        photo.description = description;
-        res.json({ message: 'Photo updated successfully' });
-    } else {
-        res.status(404).json({ message: 'Photo not found' });
-    }
-});
-app.delete('/admin/gallery/:photoId', (req, res) => {
-    const id = req.params.photoId;
-    const index = GALLERY.findIndex(p => p.id === id);
-    if (index !== -1) {
-        GALLERY.splice(index, 1);
-        res.json({ message: 'Photo deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'Photo not found' });
-    }
+app.get('/admin/events/:eventId', auth, async (req, res) => {
+  // gets/shows one events
+  const id = req.params.eventId;
+  const event = await Event.findById(id);
+  if (event) {
+    res.json({ message: 'event fetched sucessfully', event: event });
+  } else {
+    res.status(404).json({ message: 'Event not found' });
+  }
 });
 
-app.post('/admin/newsletters', (req, res) => {
-    // adds news
-    const { letterLink, description, year } = req.body;
-    const letter = NEWSLETTERS.find(n => n.year === year);
-    if (letter) {
-        res.status(403).json({ message: 'news already uploaded, check year again' });
-    }
-    else {
-        const id = genId();
-        NEWSLETTERS.push({
-            id: id,
-            letterLink: letterLink,
-            description: description,
-            year: year
-        })
-        res.status(201).json({ message: 'news added sucessfully' });
-    }
-});
-app.get('/admin/newsletters', (req, res) => {
-    // gets/shows all news
-    res.json({ message: 'news Fetched Sucessfully, ', NEWSLETTERS });
-});
-app.get('/admin/newsletters/:letterId', (req, res) => {
-    // gets/shows one news
-    const id = req.params.letterId;
-    const letter = NEWSLETTERS.find(n => n.id === id);
-    if (letter) {
-        res.json({ letter });
-    } else {
-        res.status(404).json({ message: 'news not found' });
-    }
-});
-app.put('/admin/newsletters/:letterId', (req, res) => {
-    // Edit one news
-    const id = req.params.letterId;
-    const { letterLink,description, year } = req.body;
-    const letter = NEWSLETTERS.find(n => n.id === id);
-    if (letter) {
-        letter.letterLink = letterLink;
-        letter.description = description;
-        letter.year = year;
-        res.json({ message: 'news updated successfully' });
-    } else {
-        res.status(404).json({ message: 'news not found' });
-    }
-});
-app.delete('/admin/newsletters/:letterId', (req, res) => {
-    // delete one news
-    const id = req.params.letterId;
-    const index = NEWSLETTERS.findIndex(n => n.id === id);
-    if (index !== -1) {
-        NEWSLETTERS.splice(index, 1);
-        res.json({ message: 'news deleted successfully' });
-    } else {
-        res.status(404).json({ message: 'news not found' });
-    }
+app.put('/admin/events/:eventId', auth, async (req, res) => {
+  // Edit one events
+  const id = req.params.eventId;
+  const updatedEvent = req.body;
+  const event = await Event.findByIdAndUpdate(id, updatedEvent);
+  if (event) {
+    res.json({ message: 'Event updated successfully' });
+  } else {
+    res.status(404).json({ message: 'Event not found' });
+  }
 });
 
-app.listen(PORT, () => {    
-    console.log(`server listening on port ${PORT}`);
+app.delete('/admin/events/:eventId', auth, async (req, res) => {
+  // delete one events
+  const id = req.params.eventId;
+  const event = await Event.findByIdAndDelete(id);
+  if (event) {
+    res.json({ message: 'Event deleted successfully' });
+  } else {
+    res.status(404).json({ message: 'Event not found' });
+  }
+});
+
+app.get('/admin/member', auth, async (req, res) => {
+  // gets/shows all members
+  const members = await Member.find({});
+  res.json({ message: 'members Fetched Sucessfully, ', members: members });
+});
+
+app.post('/admin/member', auth, async (req, res) => {
+  const { memberName, memberImageLink, memberPost, memberContact, memberTeam } = req.body;
+  const member = await Member.findOne({ memberName: memberName });
+  if (member) {
+    res.status(403).json({ message: 'Member already Exist, check name again' });
+  }
+  else {
+    const newMember = new Member({
+      memberName: memberName,
+      memberPost: memberPost,
+      memberContact: memberContact,
+      memberImageLink: memberImageLink,
+      memberTeam: memberTeam
+    })
+    await newMember.save();
+    res.status(201).json({ message: 'Member added sucessfully' }); 
+  }
+});
+
+app.get('/admin/member/:memberId', auth, async (req, res) => {
+  const id = req.params.memberId;
+  const member = await Member.findById(id);
+  if (member) {
+    res.json({ message: 'member fetched sucessfully', member });
+  } else {
+    res.status(404).json({ message: 'Member not found' });
+  }
+});
+
+app.put('/admin/member/:memberId', auth, async (req, res) => {
+  const id = req.params.memberId;
+  const updatedMember = req.body;
+  const member = await Member.findByIdAndUpdate(id, updatedMember);
+  if (member) {
+    res.json({ message: 'Member updated successfully' });
+  } else {
+    res.status(404).json({ message: 'Member not found' });
+  }
+});
+
+app.delete('/admin/member/:memberId', auth, async (req, res) => {
+  const id = req.params.memberId;
+  const member = await Member.findByIdAndDelete(id);
+  if (member) {
+    res.json({ message: 'Member deleted successfully' });
+  } else {
+    res.status(404).json({ message: 'Member not found' });
+  }
+});
+
+app.post('/admin/gallery', auth, async (req, res) => {
+  const { photoLink, description } = req.body;
+  const photo = new Gallery({
+    photoLink: photoLink,
+    description: description
+  })
+  await photo.save();
+  res.status(201).json({ message: 'Photo added successfully' });
+});
+
+app.get('/admin/gallery', auth, async (req, res) => {
+  const photos = await Gallery.find({});
+  res.json({ message: 'images Fetched Sucessfully', photos: photos});
+});
+
+app.get('/admin/gallery/:photoId', auth, async (req, res) => {
+  const id = req.params.photoId;
+  const photo = await Gallery.findById(id);
+  if (photo) {
+    res.json({ photo: photo });
+  } else {
+    res.status(404).json({ message: 'Photo not found' });
+  }
+});
+
+app.put('/admin/gallery/:photoId', auth, async (req, res) => {
+  const id = req.params.photoId;
+  const newPhoto = req.body;
+  const photo = await Gallery.findByIdAndUpdate(id, newPhoto);
+  if (photo) {
+    res.json({ message: 'Photo updated successfully' });
+  } else {
+    res.status(404).json({ message: 'Photo not found' });
+  }
+});
+
+app.delete('/admin/gallery/:photoId', auth, async (req, res) => {
+  const id = req.params.photoId;
+  const photo = await Gallery.findByIdAndDelete(id);
+  if (photo) {
+    res.json({ message: 'Photo deleted successfully' });
+  } else {
+    res.status(404).json({ message: 'Photo not found' });
+  }
+});
+
+app.post('/admin/newsletters', auth, async (req, res) => {
+  // adds news
+  const { letterLink, description, year } = req.body;
+  const letter = await Letter.findOne({ year: year });
+  if (letter) {
+    res.status(403).json({ message: 'news already uploaded, check year again' });
+  }
+  else {
+    const newLetter = new Letter({
+      letterLink: letterLink,
+      description: description,
+      year: year
+    })
+    await newLetter.save();
+    res.status(201).json({ message: 'news added sucessfully' });
+  }
+});
+
+app.get('/admin/newsletters', auth, async (req, res) => {
+  // gets/shows all news
+  const newsLetters = await Letter.find({});
+  res.json({ message: 'news Fetched Sucessfully, ', newsLetters: newsLetters});
+});
+
+app.get('/admin/newsletters/:letterId', auth, async (req, res) => {
+  // gets/shows one news
+  const id = req.params.letterId;
+  const letter = await Letter.findById(id);
+  if (letter) {
+    res.json({ letter: letter });
+  } else {
+    res.status(404).json({ message: 'news not found' });
+  }
+});
+
+app.put('/admin/newsletters/:letterId', auth, async (req, res) => {
+  // Edit one news
+  const id = req.params.letterId;
+  const updatedLetter = req.body;
+  const letter = await Letter.findByIdAndUpdate(id, updatedLetter);
+  if (letter) {
+    res.json({ message: 'news updated successfully' });
+  } else {
+    res.status(404).json({ message: 'news not found' });
+  }
+});
+
+app.delete('/admin/newsletters/:letterId', auth, async (req, res) => {
+  // delete one news
+  const id = req.params.letterId;
+  const letter = await Letter.findByIdAndDelete(id);
+  if (letter) {
+    res.json({ message: 'news deleted successfully' });
+  } else {
+    res.status(404).json({ message: 'news not found' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`server listening on port ${PORT}`);
 })
 
 /**
