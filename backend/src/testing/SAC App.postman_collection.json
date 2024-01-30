@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "09fecda8-5d99-4f3b-a777-a9e8e501a1f7",
+		"name": "SAC App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19508857"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "admin-register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sonal\",\n    \"password\": \"sonal@123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "admin-login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "sahil",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "sahil@123",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "gallery",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sahil\",\n    \"password\": \"sahil@123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/user/gallery"
+					},
+					"response": []
+				},
+				{
+					"name": "photo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sahil\",\n    \"password\": \"sahil@123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/user/gallery/65b953ce4db138e468684e24"
+					},
+					"response": []
+				},
+				{
+					"name": "members",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"sahil\",\n    \"password\": \"sahil@123\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/user/member"
+					},
+					"response": []
+				},
+				{
+					"name": "newsletters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "sahil",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "sahil@123",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/user/newsletters"
+					},
+					"response": []
+				},
+				{
+					"name": "events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "sahil",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "sahil@123",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/user/events"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "get-all-events",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhaGlsIiwiaWF0IjoxNzA2NjQ1NjE0LCJleHAiOjE3MDY2NDkyMTR9.ovNlZkx_UOcbTPEB1v-7LYRu_ZZxA9FxhwQOoNKnQDA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/events"
+					},
+					"response": []
+				},
+				{
+					"name": "post-single-event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventName\": \"BrandWars\",\n    \"eventDateandTime\": \"11/10/24 at 11:00 AM\",\n    \"eventVenue\": \"XSeminar Hall\",\n    \"eventOrganiser\": \"sarthak patil\",\n    \"eventContact\": \"9978679874\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/events"
+					},
+					"response": []
+				},
+				{
+					"name": "get-single-event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/admin/events/65b9519eede01345035354f3"
+					},
+					"response": []
+				},
+				{
+					"name": "edit-single-event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventContact\": {\n        \"contactName\": \"sonal patil\",\n        \"contact\": \"9978679874\"\n    },\n    \"eventName\": \"futsal\",\n    \"eventDateandTime\": \"11/10/24 at 11:00 AM\",\n    \"eventVenue\": \"XSeminar Hall\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/events/65b9519eede01345035354f3"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-single-event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/admin/events/65b9519eede01345035354f3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "add-single-member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberName\": \"sahil Nimse\",\n    \"memberPost\": \"P.R.O\",\n    \"memberImageLink\": \"https://imagelink.com\",\n    \"memberContact\": \"9128654727\",\n    \"memberTeam\": \"Core\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/member/"
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-members",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhaGlsIiwiaWF0IjoxNzA2NjQ1NjE0LCJleHAiOjE3MDY2NDkyMTR9.ovNlZkx_UOcbTPEB1v-7LYRu_ZZxA9FxhwQOoNKnQDA",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/member/"
+					},
+					"response": []
+				},
+				{
+					"name": "get-single-member",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/admin/member/65b955151c3d582003951d6d"
+					},
+					"response": []
+				},
+				{
+					"name": "edit-single-member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberName\": \"sahil Nimse\",\n    \"memberPost\": \"Technical head\",\n    \"memberImageLink\": \"https://imagelink.com\",\n    \"memberContact\": \"9128654727\",\n    \"memberTeam\": \"Core\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/member/65b955151c3d582003951d6d"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-single-member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/admin/member/65b955151c3d582003951d6d"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gallary",
+			"item": [
+				{
+					"name": "post-single-image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoLink\": \"https://imageLink.com\",\n    \"description\": \"MetaStorm_2022_TugOfWar\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/gallery"
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-images",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhaGlsIiwiaWF0IjoxNzA2NjQ1NjE0LCJleHAiOjE3MDY2NDkyMTR9.ovNlZkx_UOcbTPEB1v-7LYRu_ZZxA9FxhwQOoNKnQDA",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/gallery"
+					},
+					"response": []
+				},
+				{
+					"name": "get-single-image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/admin/gallery/65b953924db138e468684e20"
+					},
+					"response": []
+				},
+				{
+					"name": "edit-single-image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photoLink\": \"https://imageLink1.com\",\n    \"description\": \"MetaStorm_2022_TugOfWar2022\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/gallery/65b953924db138e468684e20"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-single-photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/admin/gallery/65b953924db138e468684e20"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NewsLetters",
+			"item": [
+				{
+					"name": "post-single-newsletter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"letterLink\": \"https://imageLink.com\",\n    \"description\": \"discription of newsletter\",\n    \"year\": \"2022\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/newsletters"
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-newsletters",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhaGlsIiwiaWF0IjoxNzA2NjQ1NjE0LCJleHAiOjE3MDY2NDkyMTR9.ovNlZkx_UOcbTPEB1v-7LYRu_ZZxA9FxhwQOoNKnQDA",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3000/admin/newsletters"
+					},
+					"response": []
+				},
+				{
+					"name": "get-single-newsletter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/admin/newsletters/65b954781c3d582003951d65"
+					},
+					"response": []
+				},
+				{
+					"name": "edit-single-newsletter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"letterLink\": \"https://imageLink.com\",\n    \"description\": \"description of newsletter\",\n    \"year\": \"2023\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/admin/newsletters/65b954781c3d582003951d65"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-single-newsletter",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/admin/newsletters/65b954781c3d582003951d65"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
