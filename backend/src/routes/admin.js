@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/events', auth, async (req, res) => {
     // adds events
-    const { eventName, eventDateandTime, eventVenue, eventContact, eventOrganiser } = req.body;
+    const { eventName, eventDateandTime, eventVenue, eventContact, eventOrganiser, eventPosterLink } = req.body;
     const event = await Event.findOne({ eventName: eventName });
     if (event) {
         res.status(403).json({ message: 'event already uploaded, check name again' });
@@ -44,7 +44,8 @@ router.post('/events', auth, async (req, res) => {
             eventContact: {
                 contactName: eventOrganiser,
                 contact: eventContact
-            }
+            },
+            eventPosterLink: eventPosterLink
         });
         await newEvent.save();
         res.status(201).json({ message: 'event added sucessfully' });

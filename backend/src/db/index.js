@@ -12,7 +12,8 @@ const eventSchema = new mongoose.Schema({
     eventContact: {
         contactName: String,
         contact: String
-    }
+    },
+    eventPosterLink: String
 })
 
 const memberSchema = new mongoose.Schema({
