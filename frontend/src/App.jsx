@@ -5,6 +5,9 @@ import Events from './components/Events'
 import Newsletter from './components/Newsletter'
 import Contact from './components/Contact'
 import Gallery from './components/Gallery'
+import Login from './components/admin/Login'
+import Admin from './components/admin/Admin'
+import Edit from './components/admin/Edit'
 
 function App() {
 
@@ -18,6 +21,9 @@ function App() {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/newsletter" element={<Newsletter />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/edit/:section/:id" element={<Edit />} />
         </Routes>
       </Router>
     </>

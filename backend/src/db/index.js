@@ -7,12 +7,6 @@ const adminSchema = new mongoose.Schema({
 
 const eventSchema = new mongoose.Schema({
     eventName: String,
-    eventDateandTime: String,
-    eventVenue: String,
-    eventContact: {
-        contactName: String,
-        contact: String
-    },
     eventPosterLink: String
 })
 
