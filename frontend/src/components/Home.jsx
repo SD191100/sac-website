@@ -1,12 +1,53 @@
- 
+import { Typography, IconButton } from '@mui/material';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+
 const Home = () => {
+    
+
     return (
-        <>
-            <h1>SAC - Students Association of Computer</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci soluta labore et, qui exercitationem voluptas nobis veniam possimus eligendi cum quisquam iste, quidem aut modi, hic laborum. Quo eius in, fugiat labore dicta iure dolorum obcaecati. Architecto voluptatem doloremque vitae ipsum earum error. Culpa accusantium necessitatibus quos accusamus ex a, eos officiis reiciendis aliquid nulla quaerat aut ipsum repellendus harum, quas esse impedit inventore officia! Reiciendis tenetur laudantium id culpa est corporis molestias doloremque sit, nulla quibusdam, veniam impedit. Fugit est praesentium nostrum, quo aliquid dolores nulla illo aliquam, aut, debitis necessitatibus ad totam in expedita corporis excepturi placeat maiores neque? Dolor eum quae suscipit eaque minima autem alias ea ullam nobis eius molestiae dolorem assumenda id iure minus iusto placeat veritatis quidem vel, incidunt similique, ut quibusdam! Odit temporibus laudantium ratione hic perspiciatis, qui magnam labore consequuntur porro, atque saepe, quo sunt fugiat? Impedit eos deserunt aut architecto nesciunt harum. Eaque dolorem fuga tenetur provident porro? Soluta quod voluptates itaque quia earum. Dignissimos reiciendis dolores, est maiores expedita vitae nihil amet, fugit minus debitis asperiores itaque ratione architecto incidunt corporis provident, esse repudiandae aperiam impedit. Aperiam totam modi culpa, sed dolor voluptates sit fugiat nulla sunt doloribus quibusdam aliquid dolorum, quaerat natus distinctio cum iusto magnam ipsam quod praesentium consequuntur vitae dignissimos ex beatae? Repudiandae ipsum necessitatibus soluta blanditiis quas magnam reiciendis laboriosam quae doloribus facilis eveniet est sapiente similique, temporibus eius! Vero soluta perferendis eos earum labore quibusdam nobis tenetur tempora quaerat, pariatur temporibus saepe commodi inventore alias voluptatum aspernatur quia provident ea accusantium modi dicta officia eveniet ad. Quas minima consequatur atque quos dolores quam tempore incidunt vel, nisi ullam quaerat unde officiis vitae deserunt mollitia modi asperiores quidem soluta aperiam aliquam quod deleniti iure, qui quasi! Iste cupiditate quis fugiat, ut aut molestiae officiis impedit qui modi accusamus ab repellat placeat adipisci? Itaque, quas eaque sunt ipsa molestiae provident laborum numquam minima saepe, fuga vero architecto illum, quisquam sint veniam natus aperiam amet! Quo magni quaerat, explicabo corporis vitae maiores quidem, praesentium libero et odio earum assumenda aspernatur, perferendis laudantium distinctio vel aliquid! Repellat officia, quidem possimus cum officiis aut natus voluptas, eos ex cumque maiores accusamus iusto odit praesentium obcaecati rem similique suscipit voluptates facere id ut laudantium provident commodi. Repellat placeat vel hic atque, distinctio beatae iste numquam totam sapiente accusamus impedit, consectetur modi labore magni explicabo sit? Fuga est, quia repellendus ipsum reprehenderit dignissimos inventore quos iure sit similique odit tenetur, ut in dolorum doloremque voluptas aliquam error perspiciatis impedit maxime saepe! Sit aut atque debitis corporis exercitationem aperiam voluptate nesciunt laboriosam labore repellat amet voluptas itaque, iure nihil tempore et ipsa cumque! Omnis, beatae repudiandae necessitatibus eveniet accusantium esse, aspernatur ut impedit eos suscipit non quis. Saepe consequuntur laudantium totam sequi, dolorem magni voluptatibus, facilis quia inventore dolore doloribus, iusto atque eveniet! Excepturi qui aut quam temporibus culpa consequuntur deleniti expedita adipisci cumque ab, nam, ipsam accusantium eligendi? Expedita magni, dolores hic ex tempora quos consequatur laudantium quis esse adipisci molestias odio?</p>
-        </>
+
+        <div style={{ margin: '0 auto', width: '80%', PaddingTop: '200px' }} >
+            <div>
+                <img style={{ width: '100%', border: 'solid 1px lightgray', borderRadius: '18px' }} src={"../../public/images/sac1.png" }alt="" />
+                {/* https://res.cloudinary.com/startup-grind/image/fetch/c_scale,w_2560/c_crop,h_650,w_2560,y_0.54_mul_h_sub_0.54_mul_650/c_crop,h_650,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/https://res.cloudinary.com/startup-grind/image/upload/c_fill%2Cdpr_2.0%2Cf_auto%2Cg_center%2Cq_auto:good/v1/gcs/platform-data-dsc/chapter_banners/met%2520bkc%2520nashik.jpg */}
+            </div>
+            <div style={{ marginTop: '50px' }} >
+                <Typography variant='h2' >
+                    <strong>Students` Association of Computer, MET nstitute of Engineering, Bhujbal Knowledge City, Nashik</strong>
+                </Typography>
+                <div style={{ margin: '10px' }} >
+                    <IconButton style={{
+                        border: 'solid 1px black',
+                        color: 'black',
+                        borderRadius: '50%', // to make it circular
+                        padding: '8px', // optional padding for better visual appearance
+                        marginRight: '10px'
+                    }} href="https://www.instagram.com">
+                        <InstagramIcon />
+                    </IconButton>
+                    <IconButton style={{
+                        border: 'solid 1px black',
+                        color: 'black',
+                        borderRadius: '50%', // to make it circular
+                        padding: '8px', // optional padding for better visual appearance
+                    }} href="mailto:sac_ioe@bkc.met.edu">
+                        <MailOutlineIcon />
+                    </IconButton>
+                </div>
+                <div style={{marginTop: '50px'}}>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                    <p>Student Activity Center Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla doloribus quaerat, aut excepturi expedita labore fuga rerum deserunt ipsa incidunt iusto, dolorem quos tempora, illum distinctio sequi animi impedit assumenda ullam debitis aperiam voluptatem quisquam cupiditate reprehenderit? Quas nam iste, adipisci repellat deserunt eum, similique illo amet asperiores incidunt fugiat labore illum culpa! Ipsa debitis aperiam recusandae ut commodi delectus, reprehenderit nostrum quisquam aspernatur possimus, quod quaerat. Distinctio, animi! Earum unde modi inventore ratione consequuntur placeat nam similique reprehenderit facilis deserunt alias quam debitis vitae neque quasi animi tempora fuga accusamus ut, impedit dolorem corporis officia? Alias dignissimos iure at.</p>
+                </div>
+            </div>
+        </div>
+
     );
 }
- 
+
 export default Home;
 // Enjoy Coding

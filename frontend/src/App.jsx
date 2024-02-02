@@ -1,11 +1,13 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Team from './components/Team'
 import Events from './components/Events'
+import Footer from './components/Footer'
 import Newsletter from './components/Newsletter'
 import Contact from './components/Contact'
 import Gallery from './components/Gallery'
 import Login from './components/admin/Login'
+import Navbar from './components/Navbar'
 import Admin from './components/admin/Admin'
 import Edit from './components/admin/Edit'
 
@@ -13,8 +15,11 @@ function App() {
 
   return (
     <>
+
       <Router>
-        <Routes>
+        <Navbar />
+        <div style={{ margin: '0px auto' }}>
+          <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/events" element={<Events />} />
@@ -24,7 +29,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/edit/:section/:id" element={<Edit />} />
-        </Routes>
+          </Routes>
+        </div>
+        <Footer />
       </Router>
     </>
   )
