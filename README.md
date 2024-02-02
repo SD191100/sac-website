@@ -10,7 +10,8 @@ Todo-App
 ## Introduction
 It is created to make a organised place to set information about SAC, Events, Newsletters, and Team members. It has an Admin section as well to add, remove and edit all the data.
 
-![todo-app](https://github.com/SD191100/images/blob/main/todo-app-image.png?raw=true)
+![Homepage](https://github.com/SD191100/images/blob/main/Homepage-sac.png?raw=true)
+![Admin Dashboard](https://github.com/SD191100/images/blob/main/admin-dashboard-sac.png?raw=true)
 
 ## Features
 - Show Team, Events, Photos, Newsletters.
