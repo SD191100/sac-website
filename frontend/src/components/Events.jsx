@@ -1,6 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+// import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+
 
 const Events = () => {
     const [events, setEvents] = useState([]);
@@ -19,13 +26,17 @@ const Events = () => {
     }, []);
     return (
         <>
-            <EventInfo />
-            <div>
-                {events.map((event) => {
-                    return (
-                        <Event key={event._id} event={event} />
-                    )
-                })}
+            <div style={{ margin: '0 auto', width: '80%', PaddingTop: '200px' }} >
+                <EventInfo />
+                <hr style={{height: '1px', borderColor: "gray", background: 'gray'}} />
+                <div style={{ display: "flex", justifyContent: 'space-between', flexWrap: 'wrap', marginBottom: '100px', marginTop: '50px', width: '100%', borderRadius: '18px', flexDirection: 'row', maxWidth: 'calc(100% - 15px)' }} >
+                    
+                    {events.map((event) => {
+                        return (
+                            <Event key={event._id} event={event} />
+                        )
+                    })}
+                </div>
             </div>
         </>
     );
@@ -34,21 +45,27 @@ const Events = () => {
 const Event = ({ event }) => {
     return (
         <>
-            <div>
-                <img src={event.eventPosterLink} />
-                <h3>{event.eventName}</h3>
-                <button>more Info</button>
-            </div>
+            <Card sx={{ m: '30px', maxWidth: '300px', width: '100%', }}>
+                <CardActionArea>
+                    <div style={{ display: "flex", justifyContent: "center" }} >
+                        <img style={{ height: '300px', width: '300px', margin: '10px' }} src={event.eventPosterLink} alt="" />
+                    </div>
+                    <CardContent>
+                        <Typography textAlign={"center"} gutterBottom variant="caption" component="div">
+                            {event.eventName}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
         </>
     )
 }
 
 const EventInfo = () => {
-    return <div>
-    <h1>Events</h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi hic maxime velit. Adipisci fugit, doloremque consequatur harum natus, cum optio et aperiam eum labore temporibus. Dolorum laboriosam, explicabo dolore enim repellendus similique quisquam reprehenderit sit laudantium quo quibusdam iure aut quos corrupti deleniti perferendis doloribus! Reprehenderit beatae modi saepe numquam ullam totam blanditiis doloribus vero error dolores, odit suscipit ratione nobis. Similique omnis eos veritatis, ipsa fuga tempore fugit, tenetur animi accusantium praesentium nobis, dolor mollitia odio nemo reprehenderit error vel hic deserunt? Deserunt quas, saepe deleniti cum corrupti veniam, dicta voluptates accusantium vero hic distinctio animi ipsum unde blanditiis a nesciunt dolor voluptatibus pariatur quos, officiis repellendus explicabo exercitationem nihil velit. Recusandae alias obcaecati quos asperiores minima ex consectetur laudantium fugiat doloremque ab, molestiae enim non! Sed iusto, quae, est porro unde reiciendis labore, dolore accusamus laboriosam sapiente nulla magni facere distinctio amet recusandae animi repudiandae ad. Ullam, facilis nulla fuga odit cumque voluptatibus vitae. A hic, beatae eligendi sit odio quidem enim iure repudiandae cupiditate, deleniti ea. Velit, minus dolorem amet architecto odit assumenda quis eius accusamus excepturi esse ad aliquid ducimus laudantium natus, quisquam praesentium nihil eum illum animi expedita voluptas. Autem recusandae nisi cumque nam quae.</p>
+    return <div style={{ marginBottom: '50px' }} >
+        <Typography style={{ marginBottom: '10px' }} variant={'h4'} >Events</Typography>
     </div>
 }
- 
+
 export default Events;
 // Enjoy Coding

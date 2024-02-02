@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
-import  axios  from "axios";
+import axios from "axios";
 import { useState } from "react";
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { TextField } from "@mui/material";
 
 
 const Add = ({ section, onClose }) => {
     // Define initial form data based on the section
     const initialFormData = {
         events: { eventName: '', eventPosterLink: '' },
-        member: { memberName: '', memberImageLink: '', memberPost: '', memberContact: '', memberTeam: ''  },
+        member: { memberName: '', memberImageLink: '', memberPost: '', memberContact: '', memberTeam: '' },
         gallery: { photoLink: '', description: '' },
         newsletters: { letterLink: '', description: '', year: '' },
         signup: { username: '', password: '' },
@@ -58,8 +62,10 @@ const Add = ({ section, onClose }) => {
                 return (
                     <>
                         <label>
-                            Title:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Name" variant="outlined"
                                 type="text"
                                 name="eventName"
                                 value={formData.eventName}
@@ -68,8 +74,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Poster:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Photo" variant="outlined"
                                 type="text"
                                 name="eventPosterLink"
                                 value={formData.eventPosterLink}
@@ -82,8 +90,10 @@ const Add = ({ section, onClose }) => {
                 return (
                     <>
                         <label>
-                            Image:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Link" variant="outlined"
                                 type="text"
                                 name="photoLink"
                                 value={formData.photoLink}
@@ -92,8 +102,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Description:
-                            <textarea
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Description" variant="outlined"
                                 name="description"
                                 value={formData.description}
                                 onChange={handleChange}
@@ -105,8 +117,10 @@ const Add = ({ section, onClose }) => {
                 return (
                     <>
                         <label>
-                            Name:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Name" variant="outlined"
                                 type="text"
                                 name="memberName"
                                 value={formData.memberName}
@@ -115,8 +129,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Post:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Post" variant="outlined"
                                 type="text"
                                 name="memberPost"
                                 value={formData.memberPost}
@@ -125,8 +141,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Image:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Image" variant="outlined"
                                 type="text"
                                 name="memberImageLink"
                                 value={formData.memberImageLink}
@@ -135,8 +153,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Post:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Contact" variant="outlined"
                                 type="text"
                                 name="memberContact"
                                 value={formData.memberContact}
@@ -145,22 +165,26 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Post:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Team" variant="outlined"
                                 type="text"
                                 name="memberTeam"
                                 value={formData.memberTeam}
                                 onChange={handleChange}
                             />
                         </label>
-                   </>
+                    </>
                 );
             case 'newsletters':
                 return (
                     <>
                         <label>
-                            Link:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Link" variant="outlined"
                                 type="text"
                                 name="letterLink"
                                 value={formData.letterLink}
@@ -169,8 +193,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Description:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Description" variant="outlined"
                                 type="text"
                                 name="description"
                                 value={formData.description}
@@ -179,8 +205,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Year:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Year" variant="outlined"
                                 type="text"
                                 name="year"
                                 value={formData.year}
@@ -189,13 +217,14 @@ const Add = ({ section, onClose }) => {
                         </label>
                     </>
                 );
-                case 'signup':
+            case 'signup':
                 return (
                     <>
                         <label>
-                            Username:
-                            <input
-                                type="text"
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Username" variant="outlined"
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
@@ -203,8 +232,10 @@ const Add = ({ section, onClose }) => {
                         </label>
                         <br />
                         <label>
-                            Password:
-                            <input
+                            <TextField
+                                size="small"
+                                style={{ marginBottom: '10px' }}
+                                label="Password" variant="outlined"
                                 type="password"
                                 name="password"
                                 value={formData.password}
@@ -220,15 +251,15 @@ const Add = ({ section, onClose }) => {
     };
 
     return (
-        <div>
-            <h2>Add {section}</h2>
+        <Card style={{ padding: '10px', marginBottom: '10px' }} >
+            <Typography variant="h5" >Add {section}</Typography>
             <form onSubmit={handleSubmit}>
                 {renderFields()}
                 <br />
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
+                <Button onClick={onClose}>Close</Button>
             </form>
-            <button onClick={onClose}>Close</button>
-        </div>
+        </Card>
     );
 };
 

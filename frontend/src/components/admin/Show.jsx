@@ -3,6 +3,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import ImageListItem from '@mui/material/ImageListItem';
+import Button from '@mui/material/Button';
+
 
 
 const Show = ({ section, onClose }) => {
@@ -81,11 +88,19 @@ const Show = ({ section, onClose }) => {
                     <>
                         {fetchData.map((event) => {
                             return (
-                                <div>
-                                    <img src={event.eventPosterLink} />
-                                    <h3>{event.eventName}</h3>
-                                    <button id={event._id} onClick={handleDelete} >Delete</button>
-                                </div>
+                                <Card sx={{ m: '30px', maxWidth: '300px', width: '100%', }}>
+                                    <CardActionArea>
+                                        <div style={{ display: "flex", justifyContent: "center" }} >
+                                            <img style={{ height: '300px', width: '300px', margin: '10px' }} src={event.eventPosterLink} alt="" />
+                                        </div>
+                                        <CardContent>
+                                            <Typography textAlign={"center"} gutterBottom variant="caption" component="div">
+                                                {event.eventName}
+                                            </Typography>
+                                            <Button id={event._id} onClick={handleEdit} size={'small'}>Delete</Button>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
                             )
                         })}
                     </>
@@ -95,11 +110,15 @@ const Show = ({ section, onClose }) => {
                     <>
                         {fetchData.map((photo) => {
                             return (
-                                <div>
-                                    <img src={photo.photoLink} />
-                                    <h3>{photo.description}</h3>
-                                    <button id={photo._id} onClick={handleDelete} >delete</button>
-                                </div>
+                                <ImageListItem key={photo._id}>
+                                    <img
+                                        srcSet={`${photo.photoLink}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                        src={`${photo.photoLink}?w=164&h=164&fit=crop&auto=format`}
+                                        alt={photo.description}
+                                        loading="lazy"
+                                    />
+                                    <Button id={photo._id} onClick={handleDelete} size={'small'}>Delete</Button>
+                                </ImageListItem>
                             )
                         })}
                     </>
@@ -109,13 +128,27 @@ const Show = ({ section, onClose }) => {
                     <>
                         {fetchData.map((member) => {
                             return (
-                                <div>
-                                    <img src={member.memberImageLink} />
-                                    <h3>{member.memberName}</h3>
-                                    <h4>{member.memberPost}</h4>
-                                    <button id={member._id} onClick={handleEdit} >Edit</button>
-                                    <button id={member._id} onClick={handleDelete} >Delete</button>
-                                </div>
+                                <Card variant={'elevation'} elevation={9} sx={{ m: '30px', maxWidth: '300px', width: '100%', }}>
+                                    <CardActionArea>
+                                        <div style={{ display: "flex", justifyContent: "center" }} >
+                                            <img style={{ height: '200px', width: '200px', border: 'solid 1px lightgray', borderRadius: '50%', margin: '10px' }} src={member.memberImageLink} alt="" />
+                                        </div>
+                                        <CardContent>
+                                            <Typography textAlign={"center"} gutterBottom variant="h5" component="div">
+                                                {member.memberName}
+                                            </Typography>
+                                            <Typography textAlign={'center'} variant="body2" color="text.secondary">
+                                                {member.memberPost}
+                                            </Typography>
+                                            <div style={{ display: "flex", justifyContent: "center" }} >
+                                                <Button id={member._id} onClick={handleEdit} size={'small'}>Edit</Button>
+                                            </div>
+                                            <div style={{ display: "flex", justifyContent: "center" }} >
+                                                <Button id={member._id} onClick={handleDelete} size={'small'}>Delete</Button>
+                                            </div>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
                             )
                         })}
                     </>
@@ -125,11 +158,11 @@ const Show = ({ section, onClose }) => {
                     <>
                         {fetchData.map((letter) => {
                             return (
-                                <div>
-                                    <a href={letter.letterLink}>{letter.description}</a>
-                                    <h3>{letter.year}</h3>
-                                    <button id={letter._id} onClick={handleDelete} >Delete</button>
-                                </div>
+                                <Card sx={{ m: '30px', maxWidth: '500px', padding: '10px', width: '100%', }} >
+                                    <a style={{ textDecoration: 'none' }} href={letter.letterLink}>{letter.description}</a>
+                                    <Typography>{letter.year}</Typography>
+                                    <Button id={letter._id} onClick={handleDelete} size={'small'}>Delete</Button>
+                                </Card>
                             )
                         })}
                     </>
@@ -143,11 +176,12 @@ const Show = ({ section, onClose }) => {
     return (
         <div>
             <div style={{ display: "flex", justifyContent: "space-around" }} >
-                <h2>Add {section}</h2>
-                <button onClick={onClose}>Close</button>
+                <Typography variant="h4" >Add {section}</Typography>
+                <Button onClick={onClose}>Close</Button>
             </div>
-            <div>
-                {renderFields()}
+            <div style={{marginBottom: '30px'}} >
+                {section === 'member'?<div style={{ display: "flex", justifyContent: "space-evenly", flexWrap: 'wrap', marginBottom: '100px', marginTop: '50px', width: '100%', borderRadius: '18px', flexDirection: 'row', maxWidth: 'calc(100% - 15px)' }} >{renderFields()}</div>: renderFields()}
+
             </div>
         </div>
     );

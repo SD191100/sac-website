@@ -1,6 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import axios from 'axios';
+// import Card from '@mui/material/Card';
+// import CardActionArea from '@mui/material/CardActionArea';
+// import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+
+
+// import * as React from 'react';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
+
+
 
 const Gallery = () => {
     const [photos, setPhotos] = useState([]);
@@ -20,36 +32,34 @@ const Gallery = () => {
 
     return (
         <>
-            <div>
-                <GalleryInfo />
-            </div>
-            <div>
-                {photos.map((photo) => {
-                    return (
-                        <Photo key={photo._id} photo={photo} />
-                    )
-                })}
+            <div style={{ margin: '0 auto', width: '80%', PaddingTop: '200px' }} >
+                <div>
+                    <GalleryInfo />
+                </div>
+                <hr style={{height: '1px', borderColor: "gray", background: 'gray'}} />
+                <div style={{ display: "flex", justifyContent: 'center' }} >
+                    <ImageList sx={{ width: 1500, height: 1000 }} cols={2} rowHeight={500}>
+                        {photos.map((item) => (
+                            <ImageListItem key={item._id}>
+                                <img
+                                    srcSet={`${item.photoLink}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                    src={`${item.photoLink}?w=164&h=164&fit=crop&auto=format`}
+                                    alt={item.description}
+                                    loading="lazy"
+                                />
+                            </ImageListItem>
+                        ))}
+                    </ImageList>
+                </div>
             </div>
         </>
     );
 }
 
-const Photo = ({ photo }) => {
-    return (
-        <>
-            <div>
-                <img src={photo.photoLink} />
-                <h3>{photo.description}</h3>
-                <button>more Info</button>
-            </div>
-        </>
-    )
-}
 
 const GalleryInfo = () => {
-    return <div>
-        <h1>Gallery</h1>
-        <p>Gallery Page Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic, magni obcaecati aspernatur illo perferendis officiis mollitia numquam! Accusantium magnam beatae minus quas corporis cum ipsam nihil aliquam consectetur eos, tempore sequi voluptatum illum eum qui, velit non dolorem expedita, quasi ea praesentium obcaecati excepturi. Veniam voluptatem dicta repellendus non esse accusantium cupiditate totam amet. Praesentium nobis ipsum quaerat asperiores, architecto ducimus enim quidem mollitia cumque tempore ullam, nam voluptas placeat voluptatem consequatur eos sint modi dolore. Qui saepe et deleniti quibusdam cupiditate laboriosam dolor nulla, quod a commodi ad exercitationem! Id pariatur explicabo obcaecati aliquid architecto ipsum eveniet dignissimos ea.</p>
+    return <div style={{ marginBottom: '50px' }} >
+        <Typography style={{ marginBottom: '10px' }} variant={'h4'} >Gallery</Typography>
     </div>
 }
 

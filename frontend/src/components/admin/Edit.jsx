@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
 
 
 const Edit = () => {
@@ -58,67 +62,81 @@ const Edit = () => {
 
     return (
         <>
-            <h1>Edit</h1>
-            <div>
-                <img src={data.memberImageLink} />
-                <h3>{data.memberName}</h3>
-                <h4>{data.memberPost}</h4>
-                <h4>{data.memberContact}</h4>
-                <h4>{data.memberTeam}</h4>
+            <Typography variant="h4" align="center" > <strong>Edit</strong> </Typography>
+            <div style={{display: "flex", justifyContent: 'space-around', marginBottom: '100px'}} >
+                <div>
+                    <img style={{height: '300px', width: '300px'}} src={data.memberImageLink} />
+                    <Typography>{data.memberName}</Typography>
+                    <Typography>{data.memberPost}</Typography>
+                    <Typography>{data.memberContact}</Typography>
+                    <Typography>{data.memberTeam}</Typography>
+                </div>
+                <Card style={{padding: '20px', }} >
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            <TextField
+                                style={{ margin: '10px' }}
+                                size='small'
+                                // label="Name"
+                                // type="text"
+                                name="memberName"
+                                value={data.memberName}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            <TextField
+                                style={{ margin: '10px' }}
+                                size='small'
+                                // label="Post"
+                                // type="text"
+                                name="memberPost"
+                                value={data.memberPost}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            <TextField
+                                style={{ margin: '10px' }}
+                                size='small'
+                                // label="Image Link"
+                                // type="text"
+                                name="memberImageLink"
+                                value={data.memberImageLink}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            <TextField
+                                style={{ margin: '10px' }}
+                                size='small'
+                                // label="Contact"
+                                // type="text"
+                                name="memberContact"
+                                value={data.memberContact}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <br />
+                        <label>
+                            <TextField
+                                style={{ margin: '10px' }}
+                                size='small'
+                                // label="Team"
+                                // type="text"
+                                name="memberTeam"
+                                value={data.memberTeam}
+                                onChange={handleChange}
+                            />
+                        </label>
+                        <br />
+                        <Button type="submit">Submit</Button>
+                    </form>
+                </Card>
             </div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name:
-                    <input
-                        type="text"
-                        name="memberName"
-                        value={data.memberName}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Post:
-                    <input
-                        type="text"
-                        name="memberPost"
-                        value={data.memberPost}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Image:
-                    <input
-                        type="text"
-                        name="memberImageLink"
-                        value={data.memberImageLink}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Post:
-                    <input
-                        type="text"
-                        name="memberContact"
-                        value={data.memberContact}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <label>
-                    Post:
-                    <input
-                        type="text"
-                        name="memberTeam"
-                        value={data.memberTeam}
-                        onChange={handleChange}
-                    />
-                </label>
-                <br />
-                <button type="submit">Submit</button>
-            </form>
         </>
     );
 }

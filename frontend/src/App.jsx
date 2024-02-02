@@ -4,7 +4,7 @@ import Team from './components/Team'
 import Events from './components/Events'
 import Footer from './components/Footer'
 import Newsletter from './components/Newsletter'
-import Contact from './components/Contact'
+// import Contact from './components/Contact'
 import Gallery from './components/Gallery'
 import Login from './components/admin/Login'
 import Navbar from './components/Navbar'
@@ -18,10 +18,10 @@ function App() {
 
       <Router>
         <Navbar />
-        <div style={{ margin: '0px auto' }}>
+        <div style={{ margin: '0px auto', backgroundImage: '/images/background.jpg' }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
+            {/* <Route path="/contact" element={<Contact />} /> */}
             <Route path="/events" element={<Events />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/newsletter" element={<Newsletter />} />

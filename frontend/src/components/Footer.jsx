@@ -25,8 +25,6 @@ export default function StickyFooter() {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                
-
             }}
         >
             <Container maxWidth={false}>
@@ -46,7 +44,7 @@ export default function StickyFooter() {
                         <Link href="/events" color="inherit" display="block">Events</Link>
                         <Link href="/gallery" color="inherit" display="block">Gallery</Link>
                         <Link href="/newsletter" color="inherit" display="block">Newsletter</Link>
-                        <Link href="/contact" color="inherit" display="block">Contact</Link>
+                        {/* <Link href="/contact" color="inherit" display="block">Contact</Link> */}
                     </Grid>
 
                     <Grid item xs={6} sm={3} md={2}>
