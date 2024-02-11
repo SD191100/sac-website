@@ -1,4 +1,4 @@
-Todo-App
+Sac-Website
 - Website for my Department's community with React, Node.js, and MongoDB.
 ## Table of Contents
 - [Introduction](#introduction)
